@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RedditApp</string>
+    <string name="login">Login</string>
+    <string name="registrate">Registrate</string>
+    <string name="welcome">Welcome, please login</string>
+    <string name="notRegistered">Do not have an account?</string>
+</resources>
