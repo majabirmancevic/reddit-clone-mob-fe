@@ -6,8 +6,8 @@
     <string name="notRegistered">Do not have an account?</string>
     <string name="guestbtn">Continue as guest</string>
     <string name="or">or</string>
+    <string name="alreadyRegistered">Already registered?</string>
     <string name="postedBy">Posted by</string>
-
     <string name="text">Material is an adaptable system of guidelines..</string>
 
 </resources>

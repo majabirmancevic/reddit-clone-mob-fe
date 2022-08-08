@@ -3,10 +3,11 @@ package com.example.redditapp.model;
 import java.time.LocalDate;
 
 public class User {
-
+    private Long id;
     private String username;
     private String password;
     private String email;
+    private String role;
     private String avatar;
     private LocalDate registrationDate;
     private String description;
@@ -15,7 +16,7 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, String email, String avatar, LocalDate registrationDate, String description, String displayName) {
+    public User(String username, String password, String email, String role, String avatar, LocalDate registrationDate, String description, String displayName) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -24,6 +25,24 @@ public class User {
         this.description = description;
         this.displayName = displayName;
     }
+
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
+    public User(String username, String password, String email,String role, Long id) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.id = id;
+    }
+
+    public Long getId() { return id; }
+
+    public void setId(Long id) { this.id = id; }
 
     public String getUsername() {
         return username;
@@ -81,12 +100,18 @@ public class User {
         this.displayName = displayName;
     }
 
+    public String getRole() { return role; }
+
+    public void setRole(String role) { this.role = role; }
+
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
+                "id=" + id +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", registrationDate=" + registrationDate +
                 ", description='" + description + '\'' +
