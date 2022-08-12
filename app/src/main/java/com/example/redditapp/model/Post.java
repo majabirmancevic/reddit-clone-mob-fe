@@ -3,27 +3,54 @@ package com.example.redditapp.model;
 import java.time.LocalDate;
 
 public class Post {
-    private String title;
+
+    private Long id;
+    private String postName;
     private String text;
-    private LocalDate creationDate;
-    private String imagePath;
+    private String userName;
+    private Long userId;
+    private String displayName;
+    private String communityName;
+    private Integer reactionCount;
+    private Integer commentCount;
+    private String duration;
+    private boolean upVote;
+    private boolean downVote;
 
     public Post() {
     }
 
-    public Post(String title, String text, LocalDate creationDate, String imagePath) {
-        this.title = title;
+    public Post(Long id, String postName, String text, String userName, Long userId, String displayName, String communityName, Integer reactionCount, Integer commentCount, String duration, boolean upVote, boolean downVote) {
+        this.id = id;
+        this.postName = postName;
         this.text = text;
-        this.creationDate = creationDate;
-        this.imagePath = imagePath;
+        this.userName = userName;
+        this.userId = userId;
+        this.displayName = displayName;
+        this.communityName = communityName;
+        this.reactionCount = reactionCount;
+        this.commentCount = commentCount;
+        this.duration = duration;
+        this.upVote = upVote;
+        this.downVote = downVote;
     }
 
-    public String getTitle() {
-        return title;
+
+
+    public Long getId() {
+        return id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPostName() {
+        return postName;
+    }
+
+    public void setPostName(String postName) {
+        this.postName = postName;
     }
 
     public String getText() {
@@ -34,29 +61,75 @@ public class Post {
         this.text = text;
     }
 
-    public LocalDate getCreationDate() {
-        return creationDate;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    @Override
-    public String toString() {
-        return "Post{" +
-                "title='" + title + '\'' +
-                ", text='" + text + '\'' +
-                ", creationDate=" + creationDate +
-                ", imagePath='" + imagePath + '\'' +
-                '}';
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getCommunityName() {
+        return communityName;
+    }
+
+    public void setCommunityName(String communityName) {
+        this.communityName = communityName;
+    }
+
+    public Integer getReactionCount() {
+        return reactionCount;
+    }
+
+    public void setReactionCount(Integer reactionCount) {
+        this.reactionCount = reactionCount;
+    }
+
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public boolean isUpVote() {
+        return upVote;
+    }
+
+    public void setUpVote(boolean upVote) {
+        this.upVote = upVote;
+    }
+
+    public boolean isDownVote() {
+        return downVote;
+    }
+
+    public void setDownVote(boolean downVote) {
+        this.downVote = downVote;
     }
 }

@@ -33,22 +33,21 @@ public class SplashScreenActivity extends Activity {
         setContentView(R.layout.activity_splash_screen);
 
         SharedPreferences preferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        String usernamePref = preferences.getString("username", "");
-
-        if(usernamePref == ""){
-            //TODO : MAIN ACTIVITY ZA NEULOGOVANOG KORISNIKA
-        }
-        else if(usernamePref != "") {
-            System.out.println("USER PREF NOW: " + usernamePref);
-            findLoggedIn();
-        }
+        String usernamePref = preferences.getString("username", null);
 
         int SPLASH_TIME_OUT = 3000;
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
-                finish();
+                if(usernamePref == null){
+                    startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
+                    finish();
+                }
+                else{
+                    startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+                    finish();
+                }
+
             }
         }, SPLASH_TIME_OUT);
     }

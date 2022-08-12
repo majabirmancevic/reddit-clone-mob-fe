@@ -20,8 +20,11 @@ import com.example.redditapp.R;
 import com.example.redditapp.model.AuthenticationResponse;
 import com.example.redditapp.model.LoginData;
 import com.example.redditapp.service.AuthenticationApiService;
+import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.time.Clock;
+import java.util.Date;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -37,9 +40,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
-        Button buttonLogin = (Button) findViewById(R.id.loginBtn);
-        Button buttonRegister = (Button) findViewById(R.id.registerBtn);
-        Button buttonGuest = (Button) findViewById(R.id.guestBtn);
+        Button buttonLogin = (Button)findViewById(R.id.loginBtn);
+        Button buttonRegister = (Button)findViewById(R.id.registerBtn);
+        Button buttonGuest = (Button)findViewById(R.id.guestBtn);
 
         EditText username = findViewById(R.id.loginUsername);
         EditText password = findViewById(R.id.loginPassword);
@@ -64,7 +67,9 @@ public class LoginActivity extends AppCompatActivity {
         buttonGuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO : NAPRAVITI ACTIVITY ZA NEULOGOVANOG KORISNIKA
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -75,24 +80,40 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+    public void openMain(){
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+    public void openRegister(){
+        Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+        startActivity(intent);
+    }
 
     private void loginApi(LoginData loginData) {
 
         AuthenticationApiService authenticationApiService = RetrofitClientInstance.getRetrofitInstance(LoginActivity.this).create(AuthenticationApiService.class);
-        Call<AuthenticationResponse> call = authenticationApiService.login(loginData);
-        call.enqueue(new Callback<AuthenticationResponse>() {
+        Call<ResponseBody> call = authenticationApiService.login(loginData);
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<AuthenticationResponse> call, Response<AuthenticationResponse> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 try {
                     if(response.code() == 200){
-                        AuthenticationResponse authResponse = response.body();
+                        System.out.println("ODGOVOR " + response + "RESPONSE CODE" + response.code());
+                        System.out.println("RESPONSE BODY " + response.body());
+                        Toast.makeText(LoginActivity.this, "LOGIN IN PROGRESS", Toast.LENGTH_SHORT).show();
+
+                        Gson gson = new Gson();
+
+
+                        AuthenticationResponse authResponse = gson.fromJson(response.body().string(),AuthenticationResponse.class) ;
 
                         SharedPreferences preferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
                         preferences.edit().putString("TOKEN", authResponse.getAuthenticationToken()).apply();
                         preferences.edit().putString("username", authResponse.getUsername()).apply();
-                        
+
                         openMain();
+
                         finish();
                     }
                     else if(response.code() == 403){
@@ -105,15 +126,13 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                     }
 
-                }
-                catch (NullPointerException e){
+                } catch (NullPointerException | IOException e){
                     e.printStackTrace();
                 }
-
             }
 
             @Override
-            public void onFailure(Call<AuthenticationResponse> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.i(TAG, t.toString());
             }
 
@@ -141,13 +160,6 @@ public class LoginActivity extends AppCompatActivity {
         return valid;
     }
 
-    public void openMain(){
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(intent);
-    }
-    public void openRegister(){
-        Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
-        startActivity(intent);
-    }
+
 
 }

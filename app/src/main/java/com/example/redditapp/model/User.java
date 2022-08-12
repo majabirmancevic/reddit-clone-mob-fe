@@ -8,20 +8,16 @@ public class User {
     private String password;
     private String email;
     private String role;
-    private String avatar;
-    private LocalDate registrationDate;
     private String description;
     private String displayName;
 
     public User() {
     }
 
-    public User(String username, String password, String email, String role, String avatar, LocalDate registrationDate, String description, String displayName) {
+    public User(String username, String password, String email, String role, String description, String displayName) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.avatar = avatar;
-        this.registrationDate = registrationDate;
         this.description = description;
         this.displayName = displayName;
     }
@@ -68,22 +64,6 @@ public class User {
         this.email = email;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public LocalDate getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(LocalDate registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -112,8 +92,6 @@ public class User {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", registrationDate=" + registrationDate +
                 ", description='" + description + '\'' +
                 ", displayName='" + displayName + '\'' +
                 '}';

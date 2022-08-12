@@ -71,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 201) {
+                if(response.code() == 200) {
                     Toast.makeText(RegisterActivity.this, "Registered", Toast.LENGTH_SHORT).show();
                     openLoginActivity();
                 }

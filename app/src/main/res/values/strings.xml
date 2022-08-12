@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">RedditApp</string>
     <string name="login">Login</string>
+    <string name="login_long">Login on your account</string>
     <string name="registrate">Registrate</string>
+    <string name="registration">Registration</string>
+    <string name="register_long">Become a Redditor</string>
     <string name="welcome">Welcome, please login</string>
     <string name="notRegistered">Do not have an account?</string>
     <string name="guestbtn">Continue as guest</string>
@@ -9,5 +12,18 @@
     <string name="alreadyRegistered">Already registered?</string>
     <string name="postedBy">Posted by</string>
     <string name="text">Material is an adaptable system of guidelines..</string>
-
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="add_item">Add</string>
+    <string name="edit_item">Edit</string>
+    <string name="remove_item">Remove</string>
+    <string name="save_item">Save</string>
+    <string name="cancel_item">Cancel</string>
+    <string name="long_logut">Log out from system</string>
+    <string name="logout">Log out</string>
+    <string name="view_profile">View Profile</string>
+    <string name="home_long">Home page</string>
+    <string name="home">Home</string>
+    <string name="newPost">Add post</string>
+    <string name="newCommunity">Add community</string>
 </resources>

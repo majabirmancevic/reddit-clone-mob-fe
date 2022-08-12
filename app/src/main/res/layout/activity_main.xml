@@ -19,7 +19,7 @@
 
         <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
             android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background = "@color/blue"
             app:layout_scrollFlags="scroll|enterAlways">
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -50,7 +50,7 @@
                 android:id="@+id/profileBox"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@color/material_blue_grey_800"
+                android:background="@color/lightblue"
                 android:padding="8dp" >
 
                 <ImageView

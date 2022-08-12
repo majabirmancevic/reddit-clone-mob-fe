@@ -5,7 +5,7 @@ import java.util.Date;
 public class AuthenticationResponse {
     private String authenticationToken;
     private String username;
-    private Date expiresAt;
+    //private Date expiresAt;
 
     public String getAuthenticationToken() {
         return authenticationToken;
@@ -23,13 +23,13 @@ public class AuthenticationResponse {
         this.username = username;
     }
 
-    public Date getExpiresAt() {
-        return expiresAt;
-    }
-
-    public void setExpiresAt(Date expiresAt) {
-        this.expiresAt = expiresAt;
-    }
+//    public Date getExpiresAt() {
+//        return expiresAt;
+//    }
+//
+//    public void setExpiresAt(Date expiresAt) {
+//        this.expiresAt = expiresAt;
+//    }
 
     @Override
     public String toString() {
@@ -37,6 +37,8 @@ public class AuthenticationResponse {
                 "authenticationToken='" + authenticationToken + '\'' +
                 '}';
     }
+
+
 }
 
 
