@@ -32,6 +32,21 @@
             android:theme="@style/Theme.RedditApp.NoActionBar"/>
 
         <activity
+            android:name=".activities.DetailPostActivity"
+            android:theme="@style/Theme.RedditApp.NoActionBar"/>
+        <activity
+            android:name=".activities.EditPostActivity"
+            android:theme="@style/Theme.RedditApp.NoActionBar"/>
+        <activity
+            android:name=".activities.CommentActivity"
+            android:theme="@style/Theme.RedditApp.NoActionBar"/>
+        <activity
+            android:name=".activities.AddCommentActivity"
+            android:theme="@style/Theme.RedditApp.NoActionBar"/>
+        <activity
+            android:name=".activities.EditCommentActivity"
+            android:theme="@style/Theme.RedditApp.NoActionBar"/>
+        <activity
             android:name=".activities.SplashScreenActivity"
             android:exported="true"
             android:label="@string/app_name"

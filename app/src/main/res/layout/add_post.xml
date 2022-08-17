@@ -15,7 +15,7 @@
         android:textStyle="bold"
         android:textAllCaps="true"
         android:fontFamily="sans-serif-thin"
-        android:text="@string/newCommunity"
+        android:text="@string/newPost"
         android:layout_marginBottom="20dp"
         />
 
@@ -31,16 +31,16 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/new_community_name"
+        android:id="@+id/new_post_title"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="Name"
+        android:hint="Title"
         android:layout_gravity="center"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nameCommunity_add"
+            android:id="@+id/title_post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
@@ -48,7 +48,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/new_community_desc"
+        android:id="@+id/new_post_desc"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -57,16 +57,33 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/descCommunity_add"
+            android:id="@+id/description_post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/menu"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:hint="Select community">
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonAdd_community"
+        android:id="@+id/buttonAdd_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="15dp"

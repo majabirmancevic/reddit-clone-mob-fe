@@ -30,6 +30,7 @@ import com.example.redditapp.activities.LoginActivity;
 import com.example.redditapp.activities.RegisterActivity;
 import com.example.redditapp.adapters.DrawerListAdapter;
 import com.example.redditapp.fragments.AddCommunityFragment;
+import com.example.redditapp.fragments.AddPostFragment;
 import com.example.redditapp.fragments.PostFragment;
 import com.example.redditapp.fragments.ProfileFragment;
 import com.example.redditapp.model.NavItem;
@@ -210,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransition.to(AddCommunityFragment.newInstance(), this, false);
             }
             else if(position == 2){
-                //TODO : DODAVANJE OBJAVE
+                FragmentTransition.to(AddPostFragment.newInstance(), this, false);
             }
             else if(position == 3){
                 preferences.edit().clear().apply();

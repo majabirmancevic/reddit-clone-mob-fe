@@ -35,7 +35,11 @@ public class Post {
         this.downVote = downVote;
     }
 
-
+    public Post(String postName, String text, String communityName) {
+        this.postName = postName;
+        this.text = text;
+        this.communityName = communityName;
+    }
 
     public Long getId() {
         return id;

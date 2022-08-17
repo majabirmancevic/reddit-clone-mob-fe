@@ -2,20 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/lightblue"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:background="@color/blue"
+    android:orientation="vertical"
+    android:id="@+id/editLayout"
+>
+
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginTop="20dp"
         android:textSize="25sp"
-        android:textColor="#6C6C6C"
         android:textStyle="bold"
         android:textAllCaps="true"
         android:fontFamily="sans-serif-thin"
-        android:text="@string/newCommunity"
+        android:textColorHint="@color/black"
+        android:text="Edit post"
         android:layout_marginBottom="20dp"
         />
 
@@ -31,24 +33,25 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/new_community_name"
+        android:id="@+id/post_title_edit"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="Name"
+        android:hint="Title"
         android:layout_gravity="center"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nameCommunity_add"
+            android:id="@+id/title_post_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/new_community_desc"
+        android:id="@+id/post_desc_edit"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -57,7 +60,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/descCommunity_add"
+            android:id="@+id/description_post_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
@@ -66,7 +69,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonAdd_community"
+        android:id="@+id/buttonEdit_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="15dp"
@@ -74,11 +77,7 @@
         android:layout_gravity="center"
         android:backgroundTint="@color/white"
         android:textColor="@color/blue"
-
-        android:text="Add"
-
+        android:text="@string/edit_item"
         />
-
-
 
 </LinearLayout>

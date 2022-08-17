@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:id="@+id/reaction1"
+                android:layout_width="30dp"
+                android:layout_height="140dp"
+                android:orientation="vertical"
+                android:layout_marginTop="25dp">
+
+                <ImageView
+                    android:id="@+id/upVote"
+                    android:layout_width="30dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_upwote" />
+
+                <TextView
+                    android:id="@+id/reactionCount_comment1"
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:text="0"
+                    android:textAlignment="center" />
+
+                <ImageView
+                    android:id="@+id/downVote"
+                    android:layout_width="30dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_downvote" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/username_comment1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="17dp"
+                android:layout_toRightOf="@id/reaction1"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="username"
+                android:textColor="#000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/description_comments1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/username_comment1"
+                android:layout_marginLeft="37dp"
+                android:layout_marginTop="13dp"
+                android:layout_toRightOf="@id/reaction1"
+                android:padding="15dp"
+                android:text="komentar" />
+
+            <Button
+                android:id="@+id/btnEditComment_list1"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/description_comments1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="6dp"
+                android:layout_toLeftOf="@id/btnDeleteComment_list1"
+                android:backgroundTint="@color/blue"
+                android:text="Edit"
+                android:textSize="11dp"
+                app:cornerRadius="10dp" />
+
+            <Button
+                android:id="@+id/btnDeleteComment_list1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/description_comments1"
+                android:layout_alignParentEnd="true"
+
+                android:layout_marginTop="40dp"
+                android:backgroundTint="@color/blue"
+                android:text="Delete"
+                android:textSize="11dp"
+                app:cornerRadius="10dp"></Button>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

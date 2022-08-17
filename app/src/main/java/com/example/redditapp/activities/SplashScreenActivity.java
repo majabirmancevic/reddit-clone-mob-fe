@@ -44,6 +44,7 @@ public class SplashScreenActivity extends Activity {
                     finish();
                 }
                 else{
+                    findLoggedIn();
                     startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
                     finish();
                 }
@@ -56,7 +57,7 @@ public class SplashScreenActivity extends Activity {
 
         SharedPreferences preferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String userPref = preferences.getString("username", "");
-        Long id = preferences.getLong("id", 0L);
+ //       Long idUser = preferences.getLong("id", 0L);
 
         UserApiService userApiService = RetrofitClientInstance.getRetrofitInstance(SplashScreenActivity.this).create(UserApiService.class);
         Call<User> call = userApiService.findByUsername(userPref);
@@ -65,16 +66,11 @@ public class SplashScreenActivity extends Activity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 User user = response.body();
-                System.out.println(response.body());
-                if(String.valueOf(user.getRole()).equals("USER")) {
-                    Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                if(user != null) {
+                    preferences.edit().putLong("idUser", user.getId()).apply();
                 }
-                else if(String.valueOf(user.getRole()).equals("ADMIN")) {
-                    Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                else {
+                    preferences.edit().putLong("idUser", -1).apply();
                 }
             }
 

@@ -14,12 +14,25 @@
         <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/activity_splash_screen.xml" value="0.278125" />
         <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/add_community.xml" value="0.278125" />
+        <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/add_post.xml" value="0.278125" />
+        <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/comment_item.xml" value="0.25" />
+        <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/comment_list_item.xml" value="0.22" />
+        <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/create_comment.xml" value="0.278125" />
+        <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/detail_post.xml" value="0.278125" />
         <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/drawer_list_item.xml" value="0.278125" />
+        <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/edit_comment.xml" value="0.278125" />
+        <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/edit_community.xml" value="0.278125" />
+        <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/edit_post.xml" value="0.24166666666666667" />
+        <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/edit_post_fragment.xml" value="0.278125" />
         <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/fragment_profile.xml" value="0.278125" />
+        <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/item_comment.xml" value="0.2" />
+        <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/list_item.xml" value="0.278125" />
         <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/login_activity.xml" value="0.278125" />
-        <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/post_list.xml" value="0.33" />
+        <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/post_list.xml" value="0.25" />
         <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/recycler_view.xml" value="0.278125" />
+        <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/recycler_view_comment.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/register_layout.xml" value="0.22" />
+        <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/layout/reply_comment.xml" value="0.278125" />
         <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/menu/menu_main.xml" value="0.278125" />
         <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/mipmap-anydpi-v26/ic_email.xml" value="0.18" />
         <entry key="..\:/Users/Sony/Desktop/2 GODINA SIT-2020/LETNJI SEMESTAR/MOBILNE APLIKACIJE/RedditApp/app/src/main/res/mipmap-anydpi-v26/ic_email_round.xml" value="0.18" />

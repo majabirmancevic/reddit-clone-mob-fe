@@ -1,22 +1,19 @@
 package com.example.redditapp.fragments;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.media.MediaCodec;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.auth0.android.jwt.Claim;
-import com.auth0.android.jwt.JWT;
 import com.example.redditapp.ApiClient.RetrofitClientInstance;
 import com.example.redditapp.R;
 import com.example.redditapp.adapters.PostAdapter;
@@ -32,22 +29,31 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PostFragment extends Fragment {
+public class ListPostsFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    public static PostFragment newInstance() {
-        return new PostFragment();
+    Long communityId;
+
+    public static ListPostsFragment newInstance() {
+        return new ListPostsFragment();
     }
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup vg, Bundle data) {
+    public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        View view = inflater.inflate(R.layout.recycler_view, vg, false);
+
+        View view = inflater.inflate(R.layout.recycler_view, container, false);
         recyclerView = view.findViewById(R.id.recycle_v);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new PostAdapter(new ArrayList<>(), getContext(), getActivity()));
+        recyclerView.setAdapter(new PostListAdapter(new ArrayList<>(), getContext(), getActivity()));
+
+        Bundle bundle = this.getArguments();
+        if(bundle != null){
+            communityId = bundle.getLong("communityId");
+        }
 
         return view;
     }
@@ -66,26 +72,22 @@ public class PostFragment extends Fragment {
     public void onResume(){
         super.onResume();
         getPosts();
-
-//        getActivity().getTitle();
-//        if(getActivity().getTitle().equals("RedditApp")){
-//            SharedPreferences preferences =  getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-//            String retrivedToken  = preferences.getString("TOKEN",null);
-//
-//            JWT jwt = new JWT(retrivedToken);
-//            Claim username = jwt.getClaim("sub");
-//        }
     }
 
-    private void getPosts(){
 
+    private void getPosts() {
         PostApiService postApiService = RetrofitClientInstance.getRetrofitInstance(getActivity()).create(PostApiService.class);
-        Call<List<Post>> call = postApiService.getPosts();
+        Call<List<Post>> call = postApiService.getPostsByCommunity(communityId);
         call.enqueue(new Callback<List<Post>>() {
-
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                recyclerView.setAdapter(new PostAdapter(response.body(), getContext(), getActivity()));
+                if(response.code() == 200){
+                    recyclerView.setAdapter(new PostListAdapter(response.body(), getContext(), getActivity()));
+                }
+                else{
+                    Toast.makeText(getActivity(), "Code response: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+
             }
 
             @Override
@@ -94,6 +96,5 @@ public class PostFragment extends Fragment {
             }
         });
     }
-
 
 }
