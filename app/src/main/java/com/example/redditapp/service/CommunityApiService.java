@@ -17,9 +17,15 @@ public interface CommunityApiService {
     @GET("/api/community/")
     Call<List<Community>> getCommunities();
 
+    @GET("/api/community/all")
+    Call<List<Community>> getNotDeletedCommunities();
+
     @GET("/api/community/byName/{name}")
     Call<Community> getCommunityByName(@Path("name") String name);
 
     @POST("/api/community/")
     Call <ResponseBody> createCommunity(@Body Community community);
+
+    @POST("/api/community/{id}")
+    Call<ResponseBody> suspendCommunity(@Path("id") Long id, @Body String suspendedReason);
 }

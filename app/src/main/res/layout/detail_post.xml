@@ -51,10 +51,10 @@
                 android:id="@+id/item_icon"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_alignParentStart="true"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
+                android:layout_toRightOf="@id/reactionPost"
                 android:contentDescription="@null"
                 android:src="@drawable/avatar_user" />
 
@@ -101,7 +101,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/dateCreation_detail"
-                android:layout_marginTop="15dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="12dp"
                 android:layout_toEndOf="@+id/item_icon"
                 android:layout_toRightOf="@+id/item_icon"
                 android:padding="5dp"
@@ -114,10 +116,38 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/titlePost_detail"
                 android:layout_marginTop="20dp"
-                android:padding="5dp"
+                android:layout_marginEnd="5dp"
                 android:layout_toRightOf="@+id/item_icon"
+                android:padding="5dp"
                 android:text="@string/text" />
 
+            <LinearLayout
+                android:id="@+id/reactionPost"
+                android:layout_width="30dp"
+                android:layout_height="150dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/upVotePost"
+                    android:layout_width="30dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_upwote" />
+
+                <TextView
+                    android:id="@+id/reactionCount_post"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textAlignment="center" />
+
+                <ImageView
+                    android:id="@+id/downVotePost"
+                    android:layout_width="30dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_downvote" />
+            </LinearLayout>
 
         </RelativeLayout>
 

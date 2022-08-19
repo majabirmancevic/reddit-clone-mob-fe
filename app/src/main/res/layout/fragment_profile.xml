@@ -120,6 +120,30 @@
                     android:padding="10dp"
                     android:text="update" />
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/karma"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:padding="5dp"
+                        android:text="Total karma : "
+                        android:textStyle="italic"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/countKarma"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:padding="5dp"
+                        android:textStyle="italic"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
             </LinearLayout>
 
 

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -16,9 +17,12 @@ import androidx.fragment.app.Fragment;
 import com.auth0.android.jwt.Claim;
 import com.auth0.android.jwt.JWT;
 import com.example.redditapp.ApiClient.RetrofitClientInstance;
+import com.example.redditapp.ApiClient.TokenUtils;
 import com.example.redditapp.R;
+import com.example.redditapp.activities.DetailPostActivity;
 import com.example.redditapp.model.ChangePassword;
 import com.example.redditapp.model.User;
+import com.example.redditapp.service.ReactionApiService;
 import com.example.redditapp.service.UserApiService;
 import com.example.redditapp.tools.FragmentTransition;
 import com.google.gson.Gson;
@@ -38,6 +42,9 @@ public class ProfileFragment extends Fragment {
     EditText etEmail;
     EditText etDisplayName;
     EditText etDescription;
+    TextView karma;
+    int countKarma ;
+    Long idLoggedUser;
 
     public static ProfileFragment newInstance() {
         ProfileFragment fragment = new ProfileFragment();
@@ -47,14 +54,17 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        SharedPreferences preferences =  getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String username  = preferences.getString("username",null);
+        idLoggedUser = preferences.getLong("idUser", 0L);
 
         EditText etOldPassword = view.findViewById(R.id.etOldPassword);
         EditText etNewPassword = view.findViewById(R.id.etNewPassword);
 
         Button change = view.findViewById(R.id.updateBtn_password);
-
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,11 +74,8 @@ public class ProfileFragment extends Fragment {
                     String newPassword = etNewPassword.getText().toString().trim();
 
                     ChangePassword changePassword = new ChangePassword(oldPassword,newPassword);
-
                     changePasswordApi(changePassword);
-
                 }
-
             }
         });
 
@@ -76,14 +83,10 @@ public class ProfileFragment extends Fragment {
         etEmail = view.findViewById(R.id.etEmail_info);
         etDescription = view.findViewById(R.id.etDescription_info);
         etDisplayName = view.findViewById(R.id.etDisplayName_info);
+        karma = view.findViewById(R.id.countKarma);
 
-        SharedPreferences preferences =  getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        String retrivedToken  = preferences.getString("TOKEN",null);
-        String username  = preferences.getString("username",null);
-        JWT jwt = new JWT(retrivedToken);
-        Claim userName = jwt.getClaim("sub");
         getUser(username);
-
+        getKarma();
         Button update = view.findViewById(R.id.updateBtn);
         Button edit = view.findViewById(R.id.editBtn);
 
@@ -101,6 +104,7 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+
         etUsername.setEnabled(false);
         etDescription.setEnabled(false);
         etDisplayName.setEnabled(false);
@@ -164,7 +168,7 @@ public class ProfileFragment extends Fragment {
                     etUsername.setText(user.getUsername());
                     etEmail.setText(user.getEmail());
                     etDescription.setText(user.getDescription());
-                    etDisplayName.setText(user.getDescription());
+                    etDisplayName.setText(user.getDisplayName());
                 }
                 else if(response.code() == 404){
                     Toast.makeText(getActivity(), "User doesn't exist", Toast.LENGTH_SHORT).show();
@@ -237,5 +241,22 @@ public class ProfileFragment extends Fragment {
             etUserame.setError(null);
         }
         return valid;
+    }
+
+    public void getKarma(){
+        ReactionApiService reactionApiService = RetrofitClientInstance.getRetrofitInstance(getActivity()).create(ReactionApiService.class);
+        Call<Integer> call = reactionApiService.getKarma((TokenUtils.loggedUserId(getActivity())));
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                    countKarma = response.body();
+                    karma.setText(String.valueOf(countKarma));
+                    Toast.makeText(getActivity()," KARMA = " + countKarma, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"KOD RESPONSE " + response.code(), Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) { }
+        });
+
     }
 }

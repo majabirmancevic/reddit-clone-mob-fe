@@ -1,11 +1,13 @@
 package com.example.redditapp.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,8 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.redditapp.ApiClient.RetrofitClientInstance;
 import com.example.redditapp.R;
+import com.example.redditapp.activities.SuspendCommunityActivity;
 import com.example.redditapp.adapters.PostAdapter;
 import com.example.redditapp.adapters.PostListAdapter;
+import com.example.redditapp.model.Community;
 import com.example.redditapp.model.Post;
 import com.example.redditapp.service.CommunityApiService;
 import com.example.redditapp.service.PostApiService;
@@ -32,7 +36,9 @@ import retrofit2.Response;
 public class ListPostsFragment extends Fragment {
 
     private RecyclerView recyclerView;
+    String communityName;
     Long communityId;
+    Button editCommunity,suspendCommunity;
 
     public static ListPostsFragment newInstance() {
         return new ListPostsFragment();
@@ -43,17 +49,58 @@ public class ListPostsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         setHasOptionsMenu(true);
 
-        View view = inflater.inflate(R.layout.recycler_view, container, false);
-        recyclerView = view.findViewById(R.id.recycle_v);
+        View view = inflater.inflate(R.layout.community, container, false);
+        recyclerView = view.findViewById(R.id.recycle_vi);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new PostListAdapter(new ArrayList<>(), getContext(), getActivity()));
 
+        suspendCommunity = view.findViewById(R.id.suspend_community);
+        editCommunity = view.findViewById(R.id.edit_community);
+
+
         Bundle bundle = this.getArguments();
         if(bundle != null){
-            communityId = bundle.getLong("communityId");
+            communityName = bundle.getString("communityName");
+            System.out.println("COMM NAME "+ communityName);
         }
+
+        CommunityApiService communityApiService = RetrofitClientInstance.getRetrofitInstance(getActivity()).create(CommunityApiService.class);
+        Call<Community> call = communityApiService.getCommunityByName(communityName);
+        call.enqueue(new Callback<Community>() {
+            @Override
+            public void onResponse(Call<Community> call, Response<Community> response) {
+                if(response.code() == 200){
+                    Community community = response.body();
+                    communityId = community.getId();
+                }else
+                {
+                    Toast.makeText(getActivity(), "Error!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Community> call, Throwable t) {
+            }
+        });
+
+
+        suspendCommunity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SuspendCommunityActivity.class);
+                intent.putExtra("idCommunity",communityId);
+                intent.putExtra("username", bundle.getString("username"));
+                getContext().startActivity(intent);
+            }
+        });
+
+        editCommunity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         return view;
     }
@@ -96,5 +143,7 @@ public class ListPostsFragment extends Fragment {
             }
         });
     }
+
+
 
 }

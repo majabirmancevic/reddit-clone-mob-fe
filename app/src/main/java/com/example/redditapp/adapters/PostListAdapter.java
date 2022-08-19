@@ -46,7 +46,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.Recycl
         holder.titlePost.setText(post.getPostName());
         holder.text.setText(post.getText());
         holder.commentCount.setText(post.getCommentCount().toString());
-        holder.reactionCount.setText(post.getReactionCount().toString());
+    //    holder.reactionCount.setText(post.getReactionCount().toString());
         holder.dateCreation.setText(post.getDuration());
 
         holder.btnViewPost.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +80,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.Recycl
         TextView titlePost;
         TextView text;
         TextView commentCount;
-        TextView reactionCount;
+    //    TextView reactionCount;
         TextView dateCreation;
         Button btnViewPost;
 
@@ -94,7 +94,6 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.Recycl
             text = (TextView)itemView.findViewById(R.id.textPost);
             commentCount = (TextView)itemView.findViewById(R.id.commentCount);
             btnViewPost = (Button)itemView.findViewById(R.id.btnViewPost);
-            reactionCount = (TextView)itemView.findViewById(R.id.reactionCount);
             dateCreation = (TextView)itemView.findViewById(R.id.dateCreation);
         }
     }

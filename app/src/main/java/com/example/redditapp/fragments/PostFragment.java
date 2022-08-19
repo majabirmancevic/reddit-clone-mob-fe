@@ -66,21 +66,12 @@ public class PostFragment extends Fragment {
     public void onResume(){
         super.onResume();
         getPosts();
-
-//        getActivity().getTitle();
-//        if(getActivity().getTitle().equals("RedditApp")){
-//            SharedPreferences preferences =  getActivity().getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-//            String retrivedToken  = preferences.getString("TOKEN",null);
-//
-//            JWT jwt = new JWT(retrivedToken);
-//            Claim username = jwt.getClaim("sub");
-//        }
     }
 
     private void getPosts(){
 
         PostApiService postApiService = RetrofitClientInstance.getRetrofitInstance(getActivity()).create(PostApiService.class);
-        Call<List<Post>> call = postApiService.getPosts();
+        Call<List<Post>> call = postApiService.getPostsNotDeleted();
         call.enqueue(new Callback<List<Post>>() {
 
             @Override

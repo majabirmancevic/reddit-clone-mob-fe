@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#F44336"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/suspendText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:text="Suspend community"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/suspendIcon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/suspendText"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/ic_warning"></ImageView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/new_community_name"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/suspendIcon"
+        android:layout_centerInParent="true"
+        android:hint="Type suspend reason.."
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/suspendReason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonSuspend_community"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/new_community_name"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/white"
+        android:padding="15dp"
+        android:text="Suspend"
+        android:textColor="#F44336" />
+
+</RelativeLayout>

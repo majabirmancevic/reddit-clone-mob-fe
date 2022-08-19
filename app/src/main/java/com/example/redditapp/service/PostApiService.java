@@ -26,6 +26,9 @@ public interface PostApiService {
     @GET("api/posts/byCommunity/{id}")
     Call <List<Post>> getPostsByCommunity(@Path("id") Long id);
 
+    @GET("api/posts/notSuspended")
+    Call <List<Post>> getPostsNotDeleted();
+
     @PUT("api/posts/edit/{id}")
     Call<ResponseBody> editPost(@Path("id") Long id, @Body Post post);
 

@@ -23,4 +23,11 @@ public class TokenUtils {
         }
         return null;
     }
+
+    public static Long loggedUserId(Activity activity){
+        SharedPreferences preferences = activity.getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        Long idLoggedUser = preferences.getLong("idUser", 0L);
+
+        return idLoggedUser;
+    }
 }

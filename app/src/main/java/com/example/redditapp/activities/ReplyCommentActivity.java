@@ -33,7 +33,7 @@ public class ReplyCommentActivity extends AppCompatActivity {
         setTitle(getIntent().getStringExtra("title"));
 
         Long parentId = getIntent().getLongExtra("idParent",0L);
-
+        Long postId = getIntent().getLongExtra("idPost",0L);
         EditText text = findViewById(R.id.reply);
         Button btnReply = findViewById(R.id.buttonReply);
 
@@ -43,6 +43,7 @@ public class ReplyCommentActivity extends AppCompatActivity {
                 Comment comment = new Comment();
                 comment.setParentId(parentId);
                 comment.setText(text.getText().toString());
+                comment.setPostId(postId);
 
                 reply(comment);
             }
@@ -55,7 +56,7 @@ public class ReplyCommentActivity extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code() == 200){
+                if(response.code() == 201){
                     Toast.makeText(ReplyCommentActivity.this, "Successfully added reply!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ReplyCommentActivity.this, MainActivity.class);
                     startActivity(intent);

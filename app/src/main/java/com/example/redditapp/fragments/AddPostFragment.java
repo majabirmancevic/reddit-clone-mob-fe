@@ -65,6 +65,7 @@ public class AddPostFragment extends Fragment {
                     Post post = new Post();
                     post.setPostName(title);
                     post.setText(desc);
+                    post.setCommunityName(autoCompleteText.getText().toString());
                     createPost(post);
                 }
                 else{
@@ -80,7 +81,7 @@ public class AddPostFragment extends Fragment {
         communityList = new ArrayList<>();
 
         CommunityApiService communityApiService = RetrofitClientInstance.getRetrofitInstance(getActivity()).create(CommunityApiService.class);
-        Call<List<Community>> communities = communityApiService.getCommunities();
+        Call<List<Community>> communities = communityApiService.getNotDeletedCommunities();
         communities.enqueue(new Callback<List<Community>>() {
             @Override
             public void onResponse(Call<List<Community>> call, Response<List<Community>> response) {
@@ -114,7 +115,7 @@ public class AddPostFragment extends Fragment {
                     startActivity(intent);
                 }
                 else {
-                    Toast.makeText(getActivity(), "Be sure all fields are filled", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Code response "+response.code(), Toast.LENGTH_SHORT).show();
                 }
 
             }

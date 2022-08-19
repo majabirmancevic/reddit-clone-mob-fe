@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +27,11 @@ import com.example.redditapp.fragments.EditPostFragment;
 import com.example.redditapp.fragments.ListPostsFragment;
 import com.example.redditapp.model.Comment;
 import com.example.redditapp.model.Post;
+import com.example.redditapp.model.Reaction;
+import com.example.redditapp.model.ReactionType;
 import com.example.redditapp.service.CommentApiService;
 import com.example.redditapp.service.PostApiService;
+import com.example.redditapp.service.ReactionApiService;
 import com.example.redditapp.tools.FragmentTransition;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
@@ -42,9 +46,10 @@ import retrofit2.Response;
 public class DetailPostActivity extends AppCompatActivity {
 
     static final String TAG = DetailPostActivity.class.getSimpleName();
-    TextView communityName,userName,titlePost,text,dateCreation;
+    TextView communityName,userName,titlePost,text,dateCreation, reactionCount;
     RecyclerView recyclerView;
     List<Comment> comments;
+    ImageView upVote, downVote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,17 +73,27 @@ public class DetailPostActivity extends AppCompatActivity {
         titlePost = findViewById(R.id.titlePost_detail);
         text = findViewById(R.id.textPost_detail);
         dateCreation = findViewById(R.id.dateCreation_detail);
+        upVote = findViewById(R.id.upVotePost);
+        downVote = findViewById(R.id.downVotePost);
+        reactionCount = findViewById(R.id.reactionCount_post);
+
         ExtendedFloatingActionButton fab = findViewById(R.id.extended_fab);
 
 
         Button btnEditPost = findViewById(R.id.btnEditPost);
         Button btnDeletePost = findViewById(R.id.btnDeletePost);
 
+        if(getIntent().getStringExtra("displayName") != null){
+           userName.setText(getIntent().getStringExtra("displayName"));
+        }else {
+            userName.setText(getIntent().getStringExtra("userName"));
+        }
+
         communityName.setText(getIntent().getStringExtra("communityName"));
-        userName.setText(getIntent().getStringExtra("userName"));
         titlePost.setText(getIntent().getStringExtra("title"));
         text.setText(getIntent().getStringExtra("text"));
         dateCreation.setText(getIntent().getStringExtra("dateCreation"));
+        reactionCount.setText(getIntent().getStringExtra("reactionCount"));
 
         SharedPreferences preferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         Long idLoggedUser = preferences.getLong("idUser", 0L);
@@ -86,8 +101,9 @@ public class DetailPostActivity extends AppCompatActivity {
         if(idUser != idLoggedUser){
             btnEditPost.setVisibility(View.INVISIBLE);
             btnDeletePost.setVisibility(View.INVISIBLE);
-            fab.setVisibility(View.INVISIBLE);
+
         }
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,9 +133,6 @@ public class DetailPostActivity extends AppCompatActivity {
 //                bundle.putString("text", text.getText().toString());
 //                fragment.setArguments(bundle);
 //                FragmentTransition.to(fragment , DetailPostActivity.this, true);
-
-
-
             }
         });
 
@@ -127,6 +140,30 @@ public class DetailPostActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 deletePost(idPost);
+            }
+        });
+
+        upVote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Reaction reaction = new Reaction();
+                reaction.setReactionType(ReactionType.UPVOTE);
+                reaction.setId(idPost);
+                upVoted(reaction);
+                downVote.setEnabled(false);
+                upVote.setEnabled(false);
+            }
+        });
+
+        downVote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Reaction reaction = new Reaction();
+                reaction.setReactionType(ReactionType.DOWNVOTE);
+                reaction.setId(idPost);
+                downVoted(reaction);
+                downVote.setEnabled(false);
+                upVote.setEnabled(false);
             }
         });
     }
@@ -175,7 +212,7 @@ public class DetailPostActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.code() == 200){
-                    Toast.makeText(getParent(), "Successfully deleted post!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailPostActivity.this, "Successfully deleted post!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(DetailPostActivity.this, MainActivity.class);
                     startActivity(intent);
                 }else{
@@ -188,6 +225,50 @@ public class DetailPostActivity extends AppCompatActivity {
                 Toast.makeText(getParent(), "Something went wrong!", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public boolean upVoted(Reaction reaction){
+        ReactionApiService reactionApiService = RetrofitClientInstance.getRetrofitInstance(this).create(ReactionApiService.class);
+        Call<Void> call = reactionApiService.votePost(reaction);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.code() == 200){
+                    Toast.makeText(DetailPostActivity.this, " + 1 " , Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(DetailPostActivity.this, "Code response: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(DetailPostActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return true;
+    }
+
+    public boolean downVoted(Reaction reaction){
+        ReactionApiService reactionApiService = RetrofitClientInstance.getRetrofitInstance(this).create(ReactionApiService.class);
+        Call<Void> call = reactionApiService.votePost(reaction);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.code() == 200){
+                    Toast.makeText(DetailPostActivity.this, " - 1 " , Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(DetailPostActivity.this, "Code response: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getParent(), "Something went wrong!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return true;
     }
 
     @Override

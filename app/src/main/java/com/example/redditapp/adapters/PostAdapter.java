@@ -3,7 +3,7 @@ package com.example.redditapp.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +21,7 @@ import com.example.redditapp.ApiClient.RetrofitClientInstance;
 import com.example.redditapp.R;
 import com.example.redditapp.activities.DetailPostActivity;
 import com.example.redditapp.fragments.ListPostsFragment;
-import com.example.redditapp.fragments.PostFragment;
+
 import com.example.redditapp.model.Community;
 import com.example.redditapp.model.Post;
 
@@ -58,15 +58,23 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.RecyclerViewHo
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         Post post = aData.get(position);
-        getCommunityId(post.getCommunityName());
+
+//        System.out.println("POST " + post);
+//        System.out.println("POST COMMUNITY NAME " + post.getCommunityName());
+//        communityId = getCommunityId(post.getCommunityName());
+//        System.out.println(" COMMUNITY ID " + communityId);
 
         holder.communityName.setText(post.getCommunityName());
-        holder.userName.setText(post.getUserName());
         holder.titlePost.setText(post.getPostName());
         holder.text.setText(post.getText());
         holder.commentCount.setText(post.getCommentCount().toString());
-        holder.reactionCount.setText(post.getReactionCount().toString());
         holder.dateCreation.setText(post.getDuration());
+
+        if(post.getDisplayName() != null){
+            holder.userName.setText(post.getDisplayName());
+        }else {
+            holder.userName.setText(post.getUserName());
+        }
 
         holder.btnViewPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,9 +90,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.RecyclerViewHo
                 intent.putExtra("userID", post.getUserId());
                 intent.putExtra("communityName", post.getCommunityName());
                 intent.putExtra("userName", post.getUserName());
+                intent.putExtra("displayName", post.getDisplayName());
                 intent.putExtra("title", post.getPostName());
                 intent.putExtra("text", post.getText());
                 intent.putExtra("dateCreation",post.getDuration());
+                intent.putExtra("reactionCount", post.getReactionCount().toString());
                 context.startActivity(intent);
                 System.out.println("USER ID FROM POST! " + post.getUserId());
 
@@ -98,7 +108,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.RecyclerViewHo
                 Fragment fragment = ListPostsFragment.newInstance();
                 Bundle bundle = new Bundle();
 
-                bundle.putLong("communityId", communityId);
+                bundle.putString("communityName", post.getCommunityName());
+                bundle.putString("username",post.getUserName());
                 fragment.setArguments(bundle);
                 FragmentTransition.to(fragment, activity, true);
             }
@@ -120,7 +131,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.RecyclerViewHo
         TextView titlePost;
         TextView text;
         TextView commentCount;
-        TextView reactionCount;
         TextView dateCreation;
         Button btnViewPost;
 
@@ -134,12 +144,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.RecyclerViewHo
             text = (TextView)itemView.findViewById(R.id.textPost);
             commentCount = (TextView)itemView.findViewById(R.id.commentCount);
             btnViewPost = (Button)itemView.findViewById(R.id.btnViewPost);
-            reactionCount = (TextView)itemView.findViewById(R.id.reactionCount);
             dateCreation = (TextView)itemView.findViewById(R.id.dateCreation);
             }
         }
 
-    private void getCommunityId(String name){
+    private Long getCommunityId(String name){
         CommunityApiService communityApiService = RetrofitClientInstance.getRetrofitInstance(activity).create(CommunityApiService.class);
         Call<Community> call = communityApiService.getCommunityByName(name);
         call.enqueue(new Callback<Community>() {
@@ -158,6 +167,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.RecyclerViewHo
             public void onFailure(Call<Community> call, Throwable t) {
             }
         });
+        return communityId;
     }
 
 }
