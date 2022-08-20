@@ -17,9 +17,11 @@ import com.auth0.android.jwt.JWT;
 import com.example.redditapp.ApiClient.RetrofitClientInstance;
 import com.example.redditapp.MainActivity;
 import com.example.redditapp.R;
+import com.example.redditapp.fragments.PostFragment;
 import com.example.redditapp.model.AuthenticationResponse;
 import com.example.redditapp.model.LoginData;
 import com.example.redditapp.service.AuthenticationApiService;
+import com.example.redditapp.tools.FragmentTransition;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -67,9 +69,8 @@ public class LoginActivity extends AppCompatActivity {
         buttonGuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                //FragmentTransition.to(PostFragment.newInstance(), LoginActivity.this, false);
+                openMain();
             }
         });
 
@@ -101,10 +102,9 @@ public class LoginActivity extends AppCompatActivity {
                     if(response.code() == 200){
                         System.out.println("ODGOVOR " + response + "RESPONSE CODE" + response.code());
                         System.out.println("RESPONSE BODY " + response.body());
-                        Toast.makeText(LoginActivity.this, "LOGIN IN PROGRESS", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "success", Toast.LENGTH_SHORT).show();
 
                         Gson gson = new Gson();
-
 
                         AuthenticationResponse authResponse = gson.fromJson(response.body().string(),AuthenticationResponse.class) ;
 

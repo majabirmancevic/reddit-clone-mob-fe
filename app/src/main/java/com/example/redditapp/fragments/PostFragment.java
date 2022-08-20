@@ -45,22 +45,22 @@ public class PostFragment extends Fragment {
         View view = inflater.inflate(R.layout.recycler_view, vg, false);
         recyclerView = view.findViewById(R.id.recycle_v);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        //layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(new PostAdapter(new ArrayList<>(), getContext(), getActivity()));
 
         return view;
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-
-        // ovo korostimo ako je nasa arhitekrura takva da imamo jednu aktivnost
-        // i vise fragmentaa gde svaki od njih ima svoj menu unutar toolbar-a
-        menu.clear();
-        inflater.inflate(R.menu.menu_main, menu);
-    }
+//    @Override
+//    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+//        super.onCreateOptionsMenu(menu, inflater);
+//
+//        // ovo korostimo ako je nasa arhitekrura takva da imamo jednu aktivnost
+//        // i vise fragmentaa gde svaki od njih ima svoj menu unutar toolbar-a
+//        menu.clear();
+//        inflater.inflate(R.menu.menu_main, menu);
+//    }
 
     @Override
     public void onResume(){

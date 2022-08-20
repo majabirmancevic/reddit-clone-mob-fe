@@ -27,8 +27,8 @@ import retrofit2.Response;
 
 public class SuspendCommunityActivity extends AppCompatActivity {
 
-    String role;
-    User user;
+
+   // User user;
     boolean admin;
     Button btnSuspend;
     SharedPreferences preferences;
@@ -41,14 +41,10 @@ public class SuspendCommunityActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setTitle(getIntent().getStringExtra("title"));
 
-        preferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+
 
         EditText reason = findViewById(R.id.suspendReason);
         Button btnSuspend = findViewById(R.id.buttonSuspend_community);
-
-        if(isAdmin() == true){
-            btnSuspend.setVisibility(View.INVISIBLE);
-        }
 
 
         btnSuspend.setOnClickListener(new View.OnClickListener() {
@@ -92,30 +88,5 @@ public class SuspendCommunityActivity extends AppCompatActivity {
         });
     }
 
-    public boolean isAdmin(){
-        UserApiService userApiService = RetrofitClientInstance.getRetrofitInstance(this).create(UserApiService.class);
-        Call<User> call = userApiService.findByUsername(preferences.getString("username", ""));
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if(response.code() == 200){
-                    user = response.body();
-                    role = user.getRole().toString();
-                    admin = true;
-                    System.out.println("ROLE  :" + role);
-//                    if(role != "ADMIN"){
-//                        btnSuspend.setVisibility(View.INVISIBLE);
-//                    }
-                }
-                else{
-                    Toast.makeText(SuspendCommunityActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(SuspendCommunityActivity.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
-            }
-        });
-        return admin;
-    }
+
 }

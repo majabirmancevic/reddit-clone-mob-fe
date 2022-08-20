@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/blue"
+    >
 
     <LinearLayout
         android:id="@+id/buttons"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:layout_alignParentRight="true"
+        android:orientation="horizontal"
+
         >
 
         <Button
             android:id="@+id/edit_community"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:layout_alignParentRight="true"
             android:backgroundTint="@color/lightblue"
             android:text="Edit community"/>
@@ -36,7 +40,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_below="@id/buttons">
+        android:layout_below="@id/buttons"
+        android:background="@color/lightblue">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_vi"

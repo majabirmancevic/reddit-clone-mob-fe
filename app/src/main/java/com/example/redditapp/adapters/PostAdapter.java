@@ -2,6 +2,7 @@ package com.example.redditapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -59,6 +60,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.RecyclerViewHo
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         Post post = aData.get(position);
 
+        SharedPreferences preferences = activity.getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String role = preferences.getString("role", "");
+        Long idLoggedUser = preferences.getLong("idUser", 0L);
+
 //        System.out.println("POST " + post);
 //        System.out.println("POST COMMUNITY NAME " + post.getCommunityName());
 //        communityId = getCommunityId(post.getCommunityName());
@@ -110,6 +115,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.RecyclerViewHo
 
                 bundle.putString("communityName", post.getCommunityName());
                 bundle.putString("username",post.getUserName());
+                bundle.putString("role", role);
+                bundle.putLong("idUser", idLoggedUser);
+
                 fragment.setArguments(bundle);
                 FragmentTransition.to(fragment, activity, true);
             }

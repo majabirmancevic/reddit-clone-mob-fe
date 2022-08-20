@@ -47,6 +47,9 @@
             android:name=".activities.ReplyCommentActivity"
             android:theme="@style/Theme.RedditApp.NoActionBar"/>
         <activity
+            android:name=".activities.EditCommunityActivity"
+            android:theme="@style/Theme.RedditApp.NoActionBar"/>
+        <activity
             android:name=".activities.SuspendCommunityActivity"
             android:theme="@style/Theme.RedditApp.NoActionBar"/>
         <activity

@@ -26,18 +26,26 @@ import android.widget.Toast;
 
 
 import com.auth0.android.jwt.JWT;
+import com.example.redditapp.ApiClient.RetrofitClientInstance;
 import com.example.redditapp.activities.LoginActivity;
 import com.example.redditapp.activities.RegisterActivity;
+import com.example.redditapp.activities.SplashScreenActivity;
 import com.example.redditapp.adapters.DrawerListAdapter;
 import com.example.redditapp.fragments.AddCommunityFragment;
 import com.example.redditapp.fragments.AddPostFragment;
 import com.example.redditapp.fragments.PostFragment;
 import com.example.redditapp.fragments.ProfileFragment;
 import com.example.redditapp.model.NavItem;
+import com.example.redditapp.model.User;
+import com.example.redditapp.service.UserApiService;
 import com.example.redditapp.tools.FragmentTransition;
 
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        findLoggedIn();
         prepareMenu(mNavItems);
 
         mTitle = getTitle();
@@ -67,18 +75,16 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         mDrawerList.setAdapter(adapter);
 
-        RelativeLayout profileLayout = findViewById(R.id.profileBox);
-
-        TextView user = findViewById(R.id.userName);
-
         SharedPreferences preferences =  getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         String retrivedToken  = preferences.getString("TOKEN",null);
-//        JWT jwt = new JWT(retrivedToken);
-//
-//        Claim username = jwt.getClaim("sub");
-//
-//        user.setText(username.asString());
 
+
+        RelativeLayout profileLayout = findViewById(R.id.profileBox);
+        TextView user = findViewById(R.id.userName);
+
+        if(retrivedToken == null) {
+            profileLayout.setVisibility(View.INVISIBLE);
+        }
 
         profileLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,6 +234,32 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList.setItemChecked(position, true);
         setTitle(mNavItems.get(position).getmTitle());
         mDrawerLayout.closeDrawer(mDrawerPane);
+    }
+
+    private void findLoggedIn() {
+
+        SharedPreferences preferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String userPref = preferences.getString("username", "");
+        //       Long idUser = preferences.getLong("id", 0L);
+
+        UserApiService userApiService = RetrofitClientInstance.getRetrofitInstance(MainActivity.this).create(UserApiService.class);
+        Call<User> call = userApiService.findByUsername(userPref);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                User user = response.body();
+                if(user != null) {
+                    preferences.edit().putLong("idUser", user.getId()).apply();
+                    preferences.edit().putString("role",user.getRole()).apply();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

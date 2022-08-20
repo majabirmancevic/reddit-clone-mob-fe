@@ -95,7 +95,7 @@ public class CommentActivity extends AppCompatActivity {
             btnDelete.setVisibility(View.INVISIBLE);
             btnEdit.setVisibility(View.INVISIBLE);
         }
-        if(idLoggedUser == null){
+        if(idLoggedUser == 0L){
             btnReply.setVisibility(View.INVISIBLE);
             upVoteComment.setEnabled(false);
             downVoteComment.setEnabled(false);

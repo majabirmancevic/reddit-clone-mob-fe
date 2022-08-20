@@ -44,7 +44,7 @@ public class SplashScreenActivity extends Activity {
                     finish();
                 }
                 else{
-                    findLoggedIn();
+                    //findLoggedIn();
                     startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
                     finish();
                 }
@@ -68,9 +68,7 @@ public class SplashScreenActivity extends Activity {
                 User user = response.body();
                 if(user != null) {
                     preferences.edit().putLong("idUser", user.getId()).apply();
-                }
-                else {
-                    preferences.edit().putLong("idUser", -1).apply();
+                    preferences.edit().putString("role",user.getRole()).apply();
                 }
             }
 

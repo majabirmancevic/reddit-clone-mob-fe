@@ -27,7 +27,18 @@ public class TokenUtils {
     public static Long loggedUserId(Activity activity){
         SharedPreferences preferences = activity.getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
         Long idLoggedUser = preferences.getLong("idUser", 0L);
-
         return idLoggedUser;
+    }
+
+    public static String loggedUsername(Activity activity){
+        SharedPreferences preferences = activity.getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String username = preferences.getString("username","");
+        return username;
+    }
+
+    public static String userRole(Activity activity){
+        SharedPreferences preferences = activity.getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        String role = preferences.getString("role", "");
+        return role;
     }
 }

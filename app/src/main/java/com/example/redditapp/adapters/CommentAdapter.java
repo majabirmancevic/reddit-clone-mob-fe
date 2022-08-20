@@ -100,6 +100,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Recycler
             holder.btnDelete.setVisibility(View.INVISIBLE);
             holder.btnEdit.setVisibility(View.INVISIBLE);
         }
+        if(user == null){
+            holder.downvote.setEnabled(false);
+            holder.upvote.setEnabled(false);
+        }
 
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,33 +12,24 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.redditapp.ApiClient.RetrofitClientInstance;
 import com.example.redditapp.MainActivity;
 import com.example.redditapp.R;
-import com.example.redditapp.adapters.CommentAdapter;
 import com.example.redditapp.adapters.CommentListAdapter;
-import com.example.redditapp.fragments.EditPostFragment;
-import com.example.redditapp.fragments.ListPostsFragment;
 import com.example.redditapp.model.Comment;
-import com.example.redditapp.model.Post;
 import com.example.redditapp.model.Reaction;
 import com.example.redditapp.model.ReactionType;
 import com.example.redditapp.service.CommentApiService;
 import com.example.redditapp.service.PostApiService;
 import com.example.redditapp.service.ReactionApiService;
-import com.example.redditapp.tools.FragmentTransition;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -89,20 +80,28 @@ public class DetailPostActivity extends AppCompatActivity {
             userName.setText(getIntent().getStringExtra("userName"));
         }
 
+        SharedPreferences preferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
+        Long idLoggedUser = preferences.getLong("idUser", 0L);
+
+        if(idLoggedUser == 0L){
+            fab.setVisibility(View.INVISIBLE);
+            upVote.setEnabled(false);
+            downVote.setEnabled(false);
+        }
+
         communityName.setText(getIntent().getStringExtra("communityName"));
         titlePost.setText(getIntent().getStringExtra("title"));
         text.setText(getIntent().getStringExtra("text"));
         dateCreation.setText(getIntent().getStringExtra("dateCreation"));
         reactionCount.setText(getIntent().getStringExtra("reactionCount"));
 
-        SharedPreferences preferences = getSharedPreferences("MY_APP", Context.MODE_PRIVATE);
-        Long idLoggedUser = preferences.getLong("idUser", 0L);
 
         if(idUser != idLoggedUser){
             btnEditPost.setVisibility(View.INVISIBLE);
             btnDeletePost.setVisibility(View.INVISIBLE);
 
         }
+
 
 
         fab.setOnClickListener(new View.OnClickListener() {
