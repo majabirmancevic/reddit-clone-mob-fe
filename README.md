@@ -4,6 +4,6 @@ A student project called "Reddit Clone" is an application for creating posts wit
 This application consists of 3 course areas: 
 - Server web technologies – Java Spring Boot application (Backend for Reddit Clone) + Elasticsearch is used to search posts and communities; [Reddit - Java app](https://github.com/majabirmancevic/reddit-svt)
 - Client web technologies – Angular application (Frontend for Reddit Clone);
-[Reddit - Angular app](https://gitlab.com/majabirmancevic/redditappkwt)
+[Reddit - Angular app](https://github.com/majabirmancevic/reddit-clone-web-be)
 - Mobile applications – Android application (Frontend for Reddit Clone).
 
